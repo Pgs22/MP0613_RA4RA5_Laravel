@@ -16,10 +16,12 @@ class FilmController extends Controller
     /**
      * Number films from storage
      */
-    public static function countFilms() {
+    public function countFilms() {
         $films = FilmController::readFilms();
         $number = count($films);
-        return $number;
+        return view('count', [
+        'number' => $number 
+    ]);
     }
     /**
      * List films older than input year 
