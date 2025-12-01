@@ -91,4 +91,52 @@ class FilmController extends Controller
         }
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
     }
+
+    public function listFilmsByYear($year = null)
+    {
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        //if year are null
+        if (is_null($year))
+            return view('filmsByYear.list', ["films" => $films, "title" => $title]);
+
+        //list based on year informed
+        foreach ($films as $film) {
+            if ((!is_null($year)) && $film['year'] == $year){
+                $title = "Listado de todas las pelis filtrado x año";
+                $films_filtered[] = $film;
+            }else if(!is_null($year) && $film['year'] == $year){
+                $title = "Listado de todas las pelis filtrado x año";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("filmsByYear", ["films" => $films_filtered, "title" => $title]);
+    }
+    
+    public function listFilmsByGenre($genre = null)
+    {
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        //if genre are null
+        if (is_null($genre))
+            return view('filmsByGenre.list', ["films" => $films, "title" => $title]);
+
+        //list based on genre informed
+        foreach ($films as $film) {
+            if((!is_null($genre)) && strtolower($film['genre']) == strtolower($genre)){
+                $title = "Listado de todas las pelis filtrado x categoria";
+                $films_filtered[] = $film;
+            }else if(!is_null($genre) && strtolower($film['genre']) == strtolower($genre)){
+                $title = "Listado de todas las pelis filtrado x categoria";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("filmsByGenre.list", ["films" => $films_filtered, "title" => $title]);
+    }
 }
