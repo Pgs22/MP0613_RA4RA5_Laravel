@@ -19,7 +19,7 @@ class FilmController extends Controller
     public function countFilms() {
         $films = FilmController::readFilms();
         $number = count($films);
-        return view('count', [
+        return view('films.count', [
         'number' => $number 
     ]);
     }
