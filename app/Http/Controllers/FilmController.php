@@ -26,7 +26,7 @@ class FilmController extends Controller
         /**
      * List films for country and duration
      */
-    public function durationFilms($duration = null, $country = null,)
+    public function listFilmsDuration($duration = null, $country = null)
     {        
         $films_filtered = [];
 
@@ -39,13 +39,13 @@ class FilmController extends Controller
 
         //list based on year or genre informed
         foreach ($films as $film) {
-            if ((!is_null($duration) && is_null($country)) && $film['year'] == $duration){
+            if ((!is_null($duration) && is_null($country)) && $film['duration'] == $duration){
                 $title = "Listado de todas las pelis filtrado x duracion";
                 $films_filtered[] = $film;
-            }else if((is_null($duration) && !is_null($country)) && strtolower($film['genre']) == strtolower($country)){
+            }else if((is_null($duration) && !is_null($country)) && strtolower($film['country']) == strtolower($country)){
                 $title = "Listado de todas las pelis filtrado x ciudad";
                 $films_filtered[] = $film;
-            }else if(!is_null($duration) && !is_null($country) && strtolower($film['genre']) == strtolower($country) && $film['year'] == $duration){
+            }else if(!is_null($duration) && !is_null($country) && strtolower($film['country']) == strtolower($country) && $film['duration'] == $duration){
                 $title = "Listado de todas las pelis filtrado x ciudad y duracion";
                 $films_filtered[] = $film;
             }
