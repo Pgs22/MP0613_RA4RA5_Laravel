@@ -23,6 +23,35 @@ class FilmController extends Controller
         'number' => $number 
     ]);
     }
+        /**
+     * List films for country and duration
+     */
+    public function durationFilms($duration = null, $country = null,)
+    {        
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        //if year and genre are null
+        if (is_null($duration) && is_null($country))
+            return view('films.list', ["films" => $films, "title" => $title]);
+
+        //list based on year or genre informed
+        foreach ($films as $film) {
+            if ((!is_null($duration) && is_null($country)) && $film['year'] == $duration){
+                $title = "Listado de todas las pelis filtrado x duracion";
+                $films_filtered[] = $film;
+            }else if((is_null($duration) && !is_null($country)) && strtolower($film['genre']) == strtolower($country)){
+                $title = "Listado de todas las pelis filtrado x ciudad";
+                $films_filtered[] = $film;
+            }else if(!is_null($duration) && !is_null($country) && strtolower($film['genre']) == strtolower($country) && $film['year'] == $duration){
+                $title = "Listado de todas las pelis filtrado x ciudad y duracion";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+    }
     /**
      * List films older than input year 
      * if year is not infomed 2000 year will be used as criteria

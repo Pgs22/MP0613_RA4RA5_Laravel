@@ -4,6 +4,7 @@
         "year": 1985,
         "genre": "Drama",
         "country": "Barcelona",
+        "duration": 120,
         "img_url": "https://es.web.img2.acsta.net/medias/nmedia/18/79/45/34/20253823.jpg"
     },
     {
@@ -11,6 +12,7 @@
         "year": 1985,
         "genre": "Comedia",
         "country": "Barcelona",
+        "duration": 110,
         "img_url": "https://pics.filmaffinity.com/El_club_de_los_cinco-192309838-large.jpg"
     },
     {
@@ -18,6 +20,7 @@
         "year": 1994,
         "genre": "Drama",
         "country": "Barcelona",
+        "duration": 130,
         "img_url": "https://pics.filmaffinity.com/Forrest_Gump-212765827-large.jpg"
     },
     {
@@ -25,6 +28,7 @@
         "year": 2016,
         "genre": "Ciencia Ficción",
         "country": "Barcelona",
+        "duration": 120,
         "img_url": "https://pics.filmaffinity.com/La_llegada-686966912-large.jpg"
     },
     {
@@ -32,6 +36,7 @@
         "year": 2022,
         "genre": "Drama",
         "country": "Barcelona",
+        "duration": 120,
         "img_url": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg"
     }
 ]
