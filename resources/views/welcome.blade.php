@@ -21,7 +21,8 @@
         <li><a href=/filmout/films>Pelis</a></li>
         <li><a href=/filmout/filmsByYear>Pelis por año</a></li>
         <li><a href=/filmout/filmsByGenre>Pelis por genero</a></li>
-        <li><a href=/filmout/duration>Pelis por ciudad y duracion</a></li>
+        <li><a href=/filmout/filmsDuration>Pelis por duración</a></li>
+        <li><a href=/filmout/filmsCountry>Pelis por país</a></li>
         <li><a href=/filmout/count>Numero total de pelis</a></li>
     </ul>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->

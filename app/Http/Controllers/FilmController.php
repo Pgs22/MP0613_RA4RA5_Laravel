@@ -23,35 +23,6 @@ class FilmController extends Controller
         'number' => $number 
     ]);
     }
-        /**
-     * List films for country and duration
-     */
-    public function listFilmsDuration($duration = null, $country = null)
-    {        
-        $films_filtered = [];
-
-        $title = "Listado de todas las pelis";
-        $films = FilmController::readFilms();
-
-        //if year and genre are null
-        if (is_null($duration) && is_null($country))
-            return view('films.list', ["films" => $films, "title" => $title]);
-
-        //list based on year or genre informed
-        foreach ($films as $film) {
-            if ((!is_null($duration) && is_null($country)) && $film['duration'] == $duration){
-                $title = "Listado de todas las pelis filtrado x duracion";
-                $films_filtered[] = $film;
-            }else if((is_null($duration) && !is_null($country)) && strtolower($film['country']) == strtolower($country)){
-                $title = "Listado de todas las pelis filtrado x ciudad";
-                $films_filtered[] = $film;
-            }else if(!is_null($duration) && !is_null($country) && strtolower($film['country']) == strtolower($country) && $film['duration'] == $duration){
-                $title = "Listado de todas las pelis filtrado x ciudad y duracion";
-                $films_filtered[] = $film;
-            }
-        }
-        return view("films.list", ["films" => $films_filtered, "title" => $title]);
-    }
     /**
      * List films older than input year 
      * if year is not infomed 2000 year will be used as criteria
@@ -94,17 +65,23 @@ class FilmController extends Controller
     /**
      * Lista TODAS las películas o filtra x año o categoría.
      */
-    public function listFilms($year = null, $genre = null)
+    public function listFilms($year = null, $genre = null, $duration = null, $country = null)
     {
         $films_filtered = [];
 
         $title = "Listado de todas las pelis";
         $films = FilmController::readFilms();
 
+        /*
         //if year and genre are null
         if (is_null($year) && is_null($genre))
             return view('films.list', ["films" => $films, "title" => $title]);
+        */
+        //if year + genre + country + durantion are null
+        if (is_null($year) && is_null($genre) && is_null($country) && is_null($duration))
+            return view('films.list', ["films" => $films, "title" => $title]);
 
+        /* 
         //list based on year or genre informed
         foreach ($films as $film) {
             if ((!is_null($year) && is_null($genre)) && $film['year'] == $year){
@@ -118,7 +95,36 @@ class FilmController extends Controller
                 $films_filtered[] = $film;
             }
         }
+        */
+        //list based on year or genre or country or duration informed
+        foreach ($films as $film) {
+            if ((!is_null($year) && is_null($genre) && is_null($country) && is_null($duration)) && 
+            $film['year'] == $year) {
+                $title = "Listado de todas las pelis filtrado x año";
+                $films_filtered[] = $film;
+            } else if ((is_null($year) && !is_null($genre) && is_null($country) && is_null($duration)) && 
+            strtolower($film['genre']) == strtolower($genre)) {
+                $title = "Listado de todas las pelis filtrado x categoria";
+                $films_filtered[] = $film;
+            } else if ((is_null($year) && is_null($genre) && !is_null($country) && is_null($duration)) && 
+            strtolower($film['country']) == strtolower($country)) {
+                $title = "Listado de todas las pelis filtrado x país";
+                $films_filtered[] = $film;
+            } else if ((is_null($year) && is_null($genre) && is_null($country) && !is_null($duration)) && 
+            $film['duration'] == $duration) {
+                $title = "Listado de todas las pelis filtrado x duración";
+                $films_filtered[] = $film;
+            } else if (!is_null($year) && !is_null($genre) && is_null($country) && is_null($duration) && 
+            strtolower($film['genre']) == strtolower($genre) && $film['year'] == $year) {
+                $title = "Listado de todas las pelis filtrado x categoria y año";
+                $films_filtered[] = $film;
+            } else if (is_null($year) && is_null($genre) && !is_null($country) && !is_null($duration) && 
+            strtolower($film['country']) == strtolower($country) && $film['duration'] == $duration) {
+                $title = "Listado de todas las pelis filtrado x país y duración";
+                $films_filtered[] = $film;
+            }
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
+        }
     }
 
     public function listFilmsByYear($year = null)
@@ -157,6 +163,52 @@ class FilmController extends Controller
         foreach ($films as $film) {
             if(strtolower($film['genre']) == strtolower($genre)){
                 $title = "Listado de todas las pelis filtrado x categoria";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+    }
+    /**
+     * List films for duration
+     */
+    public function listFilmsDuration($duration = null)
+        {
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        //if duration are null
+        if (is_null($duration))
+            return view('films.list', ["films" => $films, "title" => $title]);
+
+        //list based on duration informed
+        foreach ($films as $film) {
+            if ($film['duration'] == $duration){
+                $title = "Listado de todas las pelis filtrado x duración";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+    }
+        /**
+     * List films for country
+     */
+    public function listFilmsCountry($country = null)
+    {
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        //if country are null
+        if (is_null($country))
+            return view('films.list', ["films" => $films, "title" => $title]);
+
+        //list based on country informed
+        foreach ($films as $film) {
+            if(strtolower($film['country']) == strtolower($country)){
+                $title = "Listado de todas las pelis filtrado x país";
                 $films_filtered[] = $film;
             }
         }
