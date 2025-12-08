@@ -20,6 +20,7 @@
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href=/filmout/films>Pelis</a></li>
         <li><a href=/filmout/filmsByYear>Pelis por año</a></li>
+        <li><a href=/filmout/sort>Pelis ordenadas por año</a></li>
         <li><a href=/filmout/filmsByGenre>Pelis por genero</a></li>
         <li><a href=/filmout/filmsDuration>Pelis por duración</a></li>
         <li><a href=/filmout/filmsCountry>Pelis por país</a></li>

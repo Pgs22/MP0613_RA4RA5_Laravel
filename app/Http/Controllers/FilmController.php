@@ -200,23 +200,18 @@ class FilmController extends Controller
      */
     public function sortFilms($year = null)
     {
-
         $films_filtered = [];
-
         $title = "Listado de todas las pelis";
         $films = FilmController::readFilms();
-
         //if year are null
         if (is_null($year))
             return view('films.list', ["films" => $films, "title" => $title]);
-
         //list based on year informed
         foreach ($films as $film) {
             if ($film['year'] == $year){
                 $films_filtered[] = $film;
             }
         }
-
         if (!empty($films_filtered)) {
             $years = array_column($films_filtered, 'year');
             array_multisort($years, SORT_DESC, $films_filtered);
