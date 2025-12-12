@@ -33,6 +33,48 @@
 
     <!-- Include any additional HTML or Blade directives here -->
 
+        {{-- Bloque Añadir Pelicula (El Formulario) --}}
+    <hr>   
+    <h2>Añadir Pelicula</h2>        
+    {{-- El formulario apunta a la ruta 'film.create' --}}
+    <form method="POST" action="{{ route('film.create') }}" class="form-horizontal">
+        @csrf {{-- ¡IMPORTANTE! Token CSRF --}}
+
+        {{-- Campo Nombre --}}
+        <div class="form-group row mb-2">
+            <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+        </div>
+
+        {{-- Campo Año --}}
+        <div class="form-group row mb-2">
+            <label for="year" class="col-sm-3 col-form-label">Año</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="year" name="year" required>
+            </div>
+        </div>
+        
+        {{-- (Añadir aquí los demás campos: Genero, País, Duración, Imagen URL...) --}}
+        {{-- Por simplicidad, solo muestro el botón y los campos esenciales para la prueba --}}
+
+        {{-- Campo Imagen URL (Crucial para el futuro middleware) --}}
+        <div class="form-group row mb-3">
+            <label for="imagen_url" class="col-sm-3 col-form-label">Imagen URL</label>
+            <div class="col-sm-9">
+                <input type="url" class="form-control" id="imagen_url" name="imagen_url" required>
+            </div>
+        </div>
+
+        {{-- Botón Enviar --}}
+        <div class="form-group row">
+            <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+
 </body>
 
 </html>
