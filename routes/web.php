@@ -31,7 +31,12 @@ Route::middleware('year')->prefix('filmout')->group(function() {
         Route::get('filmsCountry/{country?}', [FilmController::class, 'listFilmsCountry'])->name('filmsCountry');
         Route::get('count/', [FilmController::class, 'countFilms'])->name('countFilms');
         Route::get('sort/', [FilmController::class, 'sortFilms'])->name('sortFilms');
-        Route::post('/film', [FilmController::class, 'createFilm'])->name('film.create');
+});
+
+//Creamos nueva ruta para el formulario
+Route::prefix('filmin')->group(callback: function () : void {
+    // La ruta POST para crear una película
+    Route::post('/film', [FilmController::class, 'createFilm'])->name('film.create');
 });
 
 
