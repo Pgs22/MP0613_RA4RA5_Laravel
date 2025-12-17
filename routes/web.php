@@ -21,16 +21,16 @@ Route::get('/', function () {
 
 //Route::middleware('year')->group(function() {
 Route::middleware('year')->prefix('filmout')->group(function() {
-        // Routes included with prefix "filmout"       
-        Route::get('oldFilms/{year?}',[FilmController::class, "listOldFilms"])->name('oldFilms');
-        Route::get('newFilms/{year?}',[FilmController::class, "listNewFilms"])->name('newFilms');
-        Route::get('films/{year?}/{genre?}',[FilmController::class, "listFilms"])->name('listFilms');
-        Route::get('filmsByYear/{year?}',[FilmController::class, "listFilmsByYear"])->name('filmsByYear');
-        Route::get('filmsByGenre/{genre?}',[FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
-        Route::get('filmsDuration/{duration?}', [FilmController::class, 'listFilmsDuration'])->name('filmsDuration');
-        Route::get('filmsCountry/{country?}', [FilmController::class, 'listFilmsCountry'])->name('filmsCountry');
-        Route::get('count/', [FilmController::class, 'countFilms'])->name('countFilms');
-        Route::get('sort/', [FilmController::class, 'sortFilms'])->name('sortFilms');
+    // Routes included with prefix "filmout"       
+    Route::get('oldFilms/{year?}',[FilmController::class, "listOldFilms"])->name('oldFilms');
+    Route::get('newFilms/{year?}',[FilmController::class, "listNewFilms"])->name('newFilms');
+    Route::get('films/{year?}/{genre?}',[FilmController::class, "listFilms"])->name('listFilms');
+    Route::get('filmsByYear/{year?}',[FilmController::class, "listFilmsByYear"])->name('filmsByYear');
+    Route::get('filmsByGenre/{genre?}',[FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
+    Route::get('filmsDuration/{duration?}', [FilmController::class, 'listFilmsDuration'])->name('filmsDuration');
+    Route::get('filmsCountry/{country?}', [FilmController::class, 'listFilmsCountry'])->name('filmsCountry');
+    Route::get('count/', [FilmController::class, 'countFilms'])->name('countFilms');
+    Route::get('sort/', [FilmController::class, 'sortFilms'])->name('sortFilms');
 });
 
 //Creamos nueva ruta para el formulario
@@ -40,6 +40,7 @@ Route::middleware('ValidateUrl')->group(function() {
         Route::post('/film', [FilmController::class, 'createFilm'])->name('film.create');
     });
 });
+
 
 
 
