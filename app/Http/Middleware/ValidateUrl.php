@@ -14,17 +14,32 @@ class ValidateUrl
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+    
+    /* PARA PROBAR SI LEE EL VALIDATE
+    public function handle(Request $request, Closure $next)
+{
+    // Esto matará la ejecución y mostrará "ESTOY AQUÍ" en pantalla.
+    // Si al enviar el formulario NO ves esto, el Middleware no se está ejecutando.
+    dd("ESTOY AQUÍ"); 
+
+    return $next($request);
+}
+    */
+    
+
     public function handle(Request $request, Closure $next)
     {
-
-        // 1. Obtenemos el campo 'imagen_url' que viene del formulario (<input name="imagen_url">)
         $url = $request->input('imagen_url');
 
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        // Forzamos que si NO contiene "http", siempre dé error
+        if (!str_contains($url, 'http')) {
             return redirect('/')
-            ->with('error', 'La URL de la imagen no es válida.');
+                ->withInput()
+                ->with('error', 'La URL debe ser completa (incluir http:// o https://)');
         }
-        return $next($request);
 
+        return $next($request);
     }
+
+
 }

@@ -33,16 +33,15 @@
 
     <!-- Include any additional HTML or Blade directives here -->
 
-    <!-- Añadir mensaje de error si la url es incorrecta -->
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
         {{-- Bloque Añadir Pelicula (El Formulario) --}}
     <hr>   
-    <h2>Añadir Pelicula</h2>        
+    <h2>Añadir Pelicula</h2>
+    @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+        </div>
+    @endif
+    
     {{-- El formulario apunta a la ruta 'film.create' --}}
     <form method="POST" action="{{ route('film.create') }}" class="form-horizontal">
         @csrf {{-- ¡IMPORTANTE! Token CSRF --}}
@@ -51,7 +50,7 @@
         <div class="form-group row mb-2">
             <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
             </div>
         </div>
 
@@ -59,7 +58,7 @@
         <div class="form-group row mb-2">
             <label for="year" class="col-sm-3 col-form-label">Año</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="year" name="year" required>
+                <input type="number" class="form-control" id="year" name="year" value="{{ old('year') }}" required>
             </div>
         </div>
         
@@ -67,7 +66,7 @@
         <div class="form-group row mb-2">
             <label for="genre" class="col-sm-3 col-form-label">Género</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="genre" name="genre" placeholder="Ej: Ciencia Ficción" required>
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Ej: Ciencia Ficción" value="{{ old('genre') }}"required>
             </div>
         </div>
 
@@ -75,7 +74,7 @@
         <div class="form-group row mb-2">
             <label for="country" class="col-sm-3 col-form-label">País</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="country" name="country" placeholder="Ej: EE.UU." required>
+                <input type="text" class="form-control" id="country" name="country" placeholder="Ej: EE.UU." value="{{ old('country') }}" required>
             </div>
         </div>
 
@@ -91,7 +90,7 @@
         <div class="form-group row mb-3">
             <label for="imagen_url" class="col-sm-3 col-form-label">Imagen URL</label>
             <div class="col-sm-9">
-                <input type="url" class="form-control" id="imagen_url" name="imagen_url" required>
+                <input type="text" class="form-control" id="imagen_url" name="imagen_url" required>
             </div>
         </div>
 
