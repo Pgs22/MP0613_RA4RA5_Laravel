@@ -56,8 +56,29 @@
             </div>
         </div>
         
-        {{-- (Añadir aquí los demás campos: Genero, País, Duración, Imagen URL...) --}}
-        {{-- Por simplicidad, solo muestro el botón y los campos esenciales para la prueba --}}
+        {{-- Campo Género --}}
+        <div class="form-group row mb-2">
+            <label for="genre" class="col-sm-3 col-form-label">Género</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Ej: Ciencia Ficción" required>
+            </div>
+        </div>
+
+        {{-- Campo País --}}
+        <div class="form-group row mb-2">
+            <label for="country" class="col-sm-3 col-form-label">País</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="country" name="country" placeholder="Ej: EE.UU." required>
+            </div>
+        </div>
+
+        {{-- Campo Duración --}}
+        <div class="form-group row mb-2">
+            <label for="duration" class="col-sm-3 col-form-label">Duración (min)</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="duration" name="duration" placeholder="Ej: 120" required>
+            </div>
+        </div>
 
         {{-- Campo Imagen URL (Crucial para el futuro middleware) --}}
         <div class="form-group row mb-3">
