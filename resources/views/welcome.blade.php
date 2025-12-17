@@ -33,7 +33,7 @@
 
     <!-- Include any additional HTML or Blade directives here -->
 
-    {{-- Bloque Añadir Pelicula (El Formulario) --}}
+        {{-- Bloque Añadir Pelicula (El Formulario) --}}
     <hr>   
     <h2>Añadir Pelicula</h2>        
     {{-- El formulario apunta a la ruta 'film.create' --}}
@@ -73,10 +73,7 @@
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
         </div>
-        
     </form>
-
-    {{-- ... fin de welcome.blade.php ... --}}
 
 </body>
 
