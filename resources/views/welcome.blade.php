@@ -33,6 +33,13 @@
 
     <!-- Include any additional HTML or Blade directives here -->
 
+    <!-- Añadir mensaje de error si la url es incorrecta -->
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
         {{-- Bloque Añadir Pelicula (El Formulario) --}}
     <hr>   
     <h2>Añadir Pelicula</h2>        

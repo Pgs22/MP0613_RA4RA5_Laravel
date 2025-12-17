@@ -16,13 +16,15 @@ class ValidateUrl
      */
     public function handle(Request $request, Closure $next)
     {
-        $url = $request->route('url');
 
-        // in case year is not numeric go to homepage
-        if(isset($url) && !is_numeric($url)){
+        // 1. Obtenemos el campo 'imagen_url' que viene del formulario (<input name="imagen_url">)
+        $url = $request->input('imagen_url');
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return redirect('/')
-                ->with('error', 'La URL no es válida. Redirigiendo a la página principal.');
+            ->with('error', 'La URL de la imagen no es válida.');
         }
         return $next($request);
+
     }
 }
