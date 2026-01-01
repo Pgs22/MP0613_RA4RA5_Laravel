@@ -42,8 +42,8 @@
         </div>
     @endif
     
-    {{-- El formulario apunta a la ruta 'film.create' --}}
-    <form method="POST" action="{{ route('film.create') }}" class="form-horizontal">
+    {{-- El formulario apunta a la ruta 'film' --}}
+    <form method="POST" action="{{ route('film') }}" class="form-horizontal">
         @csrf {{-- ¡IMPORTANTE! Token CSRF --}}
 
         {{-- Campo Nombre --}}

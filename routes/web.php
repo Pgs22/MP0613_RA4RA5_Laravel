@@ -33,11 +33,9 @@ Route::middleware('year')->prefix('filmout')->group(function() {
     Route::get('sort/', [FilmController::class, 'sortFilms'])->name('sortFilms');
 });
 
-//Creamos nueva ruta para el formulario
-Route::middleware('ValidateUrl')->group(function() {
-    Route::prefix('filmin')->group(function () {
-        Route::post('/film', [FilmController::class, 'createFilm'])->name('film.create');
-    });
+// Creamos nueva ruta para el formulario
+Route::middleware('ValidateUrl')->prefix('filmin')->group(function () {
+    Route::post('/film', [FilmController::class, 'createFilm'])->name('film');
 });
 
 
