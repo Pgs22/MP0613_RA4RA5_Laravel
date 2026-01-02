@@ -222,9 +222,62 @@ class FilmController extends Controller
     }
 
     /**
-     * Definimos función para probar el midleware
+     * Antes de crear la pelicula comprobamos si existe
+     * Si existe o no exite: retorna boolean
      */
-    public function createFilm(Request $request) {
-        return "¡Perfecto! Has pasado el middleware con éxito y se puede crear la peli";
+    public function isFilm($name): bool 
+    {
+        $films = self::readFilms(); // Usamos la funcion para leer las peliculas existentes
+        foreach ($films as $film) {
+            // Comparamos en minúsculas para evitar duplicados por mayúsculas
+            if (strtolower($film['name']) === strtolower($name)) {
+                return true;
+            }
+        }
+        return false;
     }
+    /**
+     * a. Crear pelicula: createFilm
+     */
+    public function createFilm(Request $request) 
+    {
+        // 1. Capturamos TODOS los campos usando el atributo 'name' del formulario
+        $name = $request->input('nombre');
+        $year = $request->input('year');
+        $genre = $request->input('genre');
+        $country = $request->input('country');
+        $duration = $request->input('duration');
+        $url = $request->input('imagen_url');
+
+        // 2. Comprobar si la película ya existe (Punto 5.a.i)
+        if ($this->isFilm($name)) {
+            // Si existe, volvemos a 'welcome' con el error (Punto 5.a.iii.1)
+            return redirect('/')
+                ->withInput()
+                ->with('error', "La película '$name' ya se encuentra en el catálogo.");
+        }
+
+        // 3. Si no existe, preparamos el nuevo registro (Punto 5.a.ii)
+        $films = self::readFilms();
+        
+        $newFilm = [
+            "name"     => $name,
+            "year"     => $year,
+            "genre"    => $genre,
+            "country"  => $country,
+            "duration" => $duration,
+            "img_url"  => $url
+        ];
+
+        // Añadimos al array
+        $films[] = $newFilm;
+
+        // 4. Guardamos en el archivo storage/app/public/films.json
+        Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
+
+        // 5. Redirigimos al listado total (Punto 5.a.ii.1)
+        return redirect()->action([FilmController::class, 'listFilms'])
+                        ->with('success', "¡'$name' se ha añadido correctamente!");
+    }
+
 }  
