@@ -15,26 +15,15 @@ class ValidateUrl
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     
-    /* PARA PROBAR SI LEE EL VALIDATE
-    public function handle(Request $request, Closure $next)
-{
-    // Esto matará la ejecución y mostrará "ESTOY AQUÍ" en pantalla.
-    // Si al enviar el formulario NO ves esto, el Middleware no se está ejecutando.
-    dd("ESTOY AQUÍ"); 
-
-    return $next($request);
-}
-    */
-    
-
+    // Si no pasa el filtro
     public function handle(Request $request, Closure $next)
     {
-        $url = $request->input('imagen_url');
+        $url = $request->input('imagen_url'); // Usamos input en vez de route porque es un formulario tipo POST no GET
 
-        // Forzamos que si NO contiene "http", siempre dé error
+        // Si el campo imagen_url no contiene http nos mostrará el mensaje de error y redirige a home
         if (!str_contains($url, 'http')) {
             return redirect('/')
-                ->withInput()
+                ->withInput() // Para guardar los datos y no tener que volver a escribir si falla el enviar formuario
                 ->with('error', 'La URL debe ser completa (incluir http:// o https://)');
         }
 

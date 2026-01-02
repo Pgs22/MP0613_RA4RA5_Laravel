@@ -225,6 +225,6 @@ class FilmController extends Controller
      * Definimos función para probar el midleware
      */
     public function createFilm(Request $request) {
-        return "¡Éxito! Has pasado el middleware porque pusiste http en la URL.";
+        return "¡Perfecto! Has pasado el middleware con éxito y se puede crear la peli";
     }
 }  
