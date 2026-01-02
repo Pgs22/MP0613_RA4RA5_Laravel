@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Total de Películas</title>
-</head>
-<body>
-    <h1>Total de Películas: {{ $number }}</h1>
-    <a href="/">Volver a inicio</a>
-</body>
-</html>
+@extends('layouts.master')
+
+@section('title', 'Total de Películas')
+
+@section('content')
+    <div class="mt-4">
+        <h1>Total de Películas: <span class="badge badge-primary">{{ $number }}</span></h1>
+        
+        <div class="mt-4">
+            <a href="/" class="btn btn-secondary">
+                <i class="fas fa-home"></i> Volver a inicio
+            </a>
+        </div>
+    </div>
+@endsection

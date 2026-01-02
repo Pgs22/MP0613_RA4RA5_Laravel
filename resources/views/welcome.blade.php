@@ -1,57 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies List</title>
+@section('title', 'Movies List')
 
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Include any additional stylesheets or scripts here -->
-</head>
-
-<body class="container">
-
+@section('content')
     <h1 class="mt-4">Lista de Peliculas</h1>
     <ul>
-        <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
-        <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
-        <li><a href=/filmout/films>Pelis</a></li>
-        <li><a href=/filmout/filmsByYear>Pelis por año</a></li>
-        <li><a href=/filmout/sort>Pelis ordenadas por año</a></li>
-        <li><a href=/filmout/filmsByGenre>Pelis por genero</a></li>
-        <li><a href=/filmout/filmsDuration>Pelis por duración</a></li>
-        <li><a href=/filmout/filmsCountry>Pelis por país</a></li>
-        <li><a href=/filmout/count>Numero total de pelis</a></li>
+        <li><a href="/filmout/oldFilms">Pelis antiguas</a></li>
+        <li><a href="/filmout/newFilms">Pelis nuevas</a></li>
+        <li><a href="/filmout/films">Pelis</a></li>
+        <li><a href="/filmout/filmsByYear">Pelis por año</a></li>
+        <li><a href="/filmout/sort">Pelis ordenadas por año</a></li>
+        <li><a href="/filmout/filmsByGenre">Pelis por genero</a></li>
+        <li><a href="/filmout/filmsDuration">Pelis por duración</a></li>
+        <li><a href="/filmout/filmsCountry">Pelis por país</a></li>
+        <li><a href="/filmout/count">Numero total de pelis</a></li>
     </ul>
-    <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Include any additional HTML or Blade directives here -->
-
-        {{-- Bloque Añadir Pelicula (El Formulario) --}}
+    {{-- Bloque Añadir Pelicula (El Formulario) --}}
     <hr>   
     <h2>Añadir Pelicula</h2>
-    <!-- Añadir mensaje de error si la url es incorrecta -->
     @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="cursor: pointer;" onclick="this.style.display='none'">
             <strong>¡Error!</strong> {{ session('error') }}
-            <!-- Para cerrar el mensaje de alerta añadimos un boton de cierre y desaparezca el mensaje
-            asi no hay que volver a recargar la pagina para actulizar el dato erroneo
-            Tambien añadimos el atributo value sea .."old".. en cada campo, para que no tengamos
-            que rescribirlos si nos da error la validación de image_url ((en el resto no lo hemos añadido en si middleware))-->
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     @endif
 
-
-    
     {{-- El formulario apunta a la ruta 'film' --}}
     <form method="POST" action="{{ route('film') }}" class="form-horizontal">
         @csrf {{-- ¡IMPORTANTE! Token CSRF --}}
@@ -111,7 +87,4 @@
             </div>
         </div>
     </form>
-
-</body>
-
-</html>
+@endsection
