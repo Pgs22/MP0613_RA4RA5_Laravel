@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Total de Películas')
+@section('header_title', 'Total de Películas')
 
 @section('content')
     <div class="mt-4">

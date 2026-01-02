@@ -14,7 +14,7 @@
         <div class="d-flex align-items-center">
             {{-- Añadimos la imagen desde public/img --}}
             <img src="{{ asset('img/default.png') }}" alt="Logo" width="150" class="mr-3 img-fluid shadow-sm rounded">
-            <h1 class="h3"> PelisLaravel</h1>
+            <h1 class="h3"> @yield('header_title', 'PelisLaravel')</h1>
         </div>
     </header>
 

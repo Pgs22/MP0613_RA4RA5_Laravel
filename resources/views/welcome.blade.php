@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Movies List')
+@section('header_title', 'Movies List')
 
 @section('content')
     <h1 class="mt-4">Lista de Peliculas</h1>
