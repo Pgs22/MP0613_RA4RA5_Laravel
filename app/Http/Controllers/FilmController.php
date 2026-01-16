@@ -250,7 +250,7 @@ class FilmController extends Controller
         $url = $request->input('imagen_url');
 
         // 2. Comprobar si la película ya existe (Punto 5.a.i)
-        if ($this->isFilm($name)) {
+        if ($this->isFilm($name)) { // Aqui usamos el metodo que retorna un booolean
             // Si existe, volvemos a 'welcome' con el error (Punto 5.a.iii.1)
             return redirect('/')
                 ->withInput()
