@@ -11,22 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-/*        "name": "La Rosa P\u00farpura del Cairo",
-        "year": 1985,
-        "genre": "Drama",
-        "duration": 120,
-        "country": "Espa\u00f1a",
-        "img_url"*/
-
         Schema::create('films', function (Blueprint $table) {
-        $table->bigIncrements('id');
-        $table->string('name');
-        $table->unsignedBigInteger('year');
-        $table->string('genre');
-        $table->unsignedBigInteger('duration');
-        $table->string('country');
-        $table->text('img_url');
+        $table->id();
+        $table->string('name', 100);
+        $table->year('year');
+        $table->string('genre', 50);
+        $table->Integer('duration');
+        $table->string('country', 30);
+        $table->string('img_url', 255);
         $table->timestamps();
         });
     }
@@ -36,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::dropIfExists('films');
     }
 };
