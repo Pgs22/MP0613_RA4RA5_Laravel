@@ -13,7 +13,7 @@ class ActorFakerSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i=1; $i<10; $i++){
+        for($i=1; $i<=10; $i++){
             DB::table('actors')->insert(array(
                 "name" => "Actor$i",
                 "surname" => "Apellido$i",
