@@ -14,7 +14,8 @@ class FilmController extends Controller
     public static function readFilms(): array {
         // $films = Storage::json('/public/films.json');
 
-        $films = Film::all();
+        // en ejemplo: $films = Film::all(); // Esto devuelve una colección de objetos Film
+        $films = Film::all()->toArray(); // Convertimos la colección a un array de arrays asociativos
         dd($films);
         return $films;
     }
@@ -22,8 +23,9 @@ class FilmController extends Controller
      * Number films from storage
      */
     public function countFilms() {
-        $films = FilmController::readFilms();
-        $number = count($films);
+        // $films = FilmController::readFilms();
+        // $number = count($films);
+        $number = Film::count(); // Contamos directamente los registros en la base de datos usando Eloquent
         return view('films.count', [
         'number' => $number 
     ]);
@@ -34,18 +36,22 @@ class FilmController extends Controller
      */
     public function listOldFilms($year = null)
     {        
-        $old_films = [];
+        // $old_films = [];
         if (is_null($year))
         $year = 2000;
     
         $title = "Listado de Pelis Antiguas (Antes de $year)";    
-        $films = FilmController::readFilms();
+        // $films = FilmController::readFilms();
 
-        foreach ($films as $film) {
-        //foreach ($this->datasource as $film) {
-            if ($film['year'] < $year)
-                $old_films[] = $film;
-        }
+        // foreach ($films as $film) {
+        // //foreach ($this->datasource as $film) {
+        //     if ($film['year'] < $year)
+        //         $old_films[] = $film;
+        // }
+
+        //Con eloquent, podríamos hacer algo como: $old_films = Film::where('year', '<', $year)->get()->toArray();
+        $old_films = Film::where('year', '<', $year)->get();
+
         return view('films.list', ["films" => $old_films, "title" => $title]);
     }
     /**
@@ -54,25 +60,29 @@ class FilmController extends Controller
      */
     public function listNewFilms($year = null)
     {
-        $new_films = [];
+        // $new_films = [];
         if (is_null($year))
             $year = 2000;
 
         $title = "Listado de Pelis Nuevas (Después de $year)";
-        $films = FilmController::readFilms();
+        // $films = FilmController::readFilms();
 
-        foreach ($films as $film) {
-            if ($film['year'] >= $year)
-                $new_films[] = $film;
-        }
+        // foreach ($films as $film) {
+        //     if ($film['year'] >= $year)
+        //         $new_films[] = $film;
+        // }
+        
+        //Con eloquent
+        $new_films = Film::where('year', '>=', $year)->get()->toArray();
         return view('films.list', ["films" => $new_films, "title" => $title]);
+
     }
     /**
      * Lista TODAS las películas o filtra x año o categoría.
      */
     public function listFilms($year = null, $genre = null, $duration = null, $country = null)
     {
-        $films_filtered = [];
+        // $films_filtered = [];
 
         $title = "Listado de todas las pelis ordenadas por año";
         $films = FilmController::readFilms();
@@ -261,9 +271,15 @@ class FilmController extends Controller
                 ->with('error', "La película '$name' ya se encuentra en el catálogo.");
         }
 
+        // 2. Adaptado a Eloquent, creamos una nueva instancia del modelo Film
+        if (Film::where('name', $name)->exists()) { 
+            return redirect('/')
+                ->withInput()
+                ->with('error', "La película '$name' ya se encuentra en el catálogo.");
+        }   
+
         // 3. Si no existe, preparamos el nuevo registro (Punto 5.a.ii)
-        $films = self::readFilms();
-        
+        $films = self::readFilms();       
         $newFilm = [
             "name"     => $name,
             "year"     => $year,
@@ -272,16 +288,28 @@ class FilmController extends Controller
             "duration" => $duration,
             "img_url"  => $url
         ];
-
         // Añadimos al array
         $films[] = $newFilm;
+
+        // 3. Adaptado a Eloquent, creamos una nueva instancia del modelo Film y asignamos los valores
+        $film = new Film();
+        $film->name = $name;
+        $film->year = $year;
+        $film->genre = $genre;
+        $film->country = $country;
+        $film->duration = $duration;
+        $film->img_url = $url;
 
         // 4. Guardamos en el archivo storage/app/public/films.json
         Storage::put('/public/films.json', json_encode($films, JSON_PRETTY_PRINT));
 
-        // 5. Redirigimos al listado total (Punto 5.a.ii.1)
+        // 4. Adaptado a Eloquent, guardamos el nuevo registro en la base de datos
+        $film->save();
+
+        // 5. Redirigimos al listado total (Punto 5.a.ii.1) con json de peliculas actualizado
         return redirect()->action([FilmController::class, 'listFilms'])
                         ->with('success', "¡'$name' se ha añadido correctamente!");
+
     }
 
 }  
