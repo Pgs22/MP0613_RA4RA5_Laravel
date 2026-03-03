@@ -14,7 +14,7 @@ class FilmController extends Controller
     public static function readFilms()
     {
         // Antes: lectura desde JSON en storage. Ahora: Eloquent
-        return Film::all();
+        return Film::all()->toArray();
     }
     /**
      * Number films from storage
@@ -40,7 +40,7 @@ class FilmController extends Controller
         $title = "Listado de Pelis Antiguas (Antes de $year)";    
         // $films = FilmController::readFilms();
         // Con Eloquent
-        $old_films = Film::where('year', '<', $year)->orderBy('year', 'desc')->get();
+        $old_films = Film::where('year', '<', $year)->get()->toArray();
         return view('films.list', ["films" => $old_films, "title" => $title]);
     }
     /**
@@ -62,7 +62,7 @@ class FilmController extends Controller
         // }
         
         // Con Eloquent
-        $new_films = Film::where('year', '>=', $year)->orderBy('year')->get();
+        $new_films = Film::where('year', '>=', $year)->orderBy('year')->get()->toArray();
         return view('films.list', ["films" => $new_films, "title" => $title]);
 
     }
@@ -101,7 +101,7 @@ class FilmController extends Controller
             }
         }
 
-        $films = $query->orderBy('year')->get();
+        $films = $query->orderBy('year')->get()->toArray();
 
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -113,7 +113,7 @@ class FilmController extends Controller
             $films = Film::orderBy('year')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::where('year', $year)->orderBy('year')->get();
+        $films = Film::where('year', $year)->orderBy('year')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x año";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -125,7 +125,7 @@ class FilmController extends Controller
             $films = Film::orderBy('year')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::whereRaw('LOWER(genre) = ?', [strtolower($genre)])->orderBy('year')->get();
+        $films = Film::whereRaw('LOWER(genre) = ?', [strtolower($genre)])->orderBy('year')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x categoria";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -139,7 +139,7 @@ class FilmController extends Controller
             $films = Film::orderBy('year')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::where('duration', $duration)->orderBy('year')->get();
+        $films = Film::where('duration', $duration)->orderBy('year')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x duración";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -153,7 +153,7 @@ class FilmController extends Controller
             $films = Film::orderBy('year')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::whereRaw('LOWER(country) = ?', [strtolower($country)])->orderBy('year')->get();
+        $films = Film::whereRaw('LOWER(country) = ?', [strtolower($country)])->orderBy('year')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x país";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -171,7 +171,7 @@ class FilmController extends Controller
             return view('films.list', ["films" => $films, "title" => $title]);
         }
         // Si se indica año, filtramos por ese año
-        $films = Film::where('year', $year)->orderBy('year', 'desc')->get();
+        $films = Film::where('year', $year)->orderBy('year', 'desc')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x año";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
