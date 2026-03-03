@@ -17,12 +17,12 @@ class FilmFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'     => $this->faker->sentence(3),
-            'year'     => $this->faker->year(),
-            'genre'    => $this->faker->word(),
-            'country'  => $this->faker->country(),
+            'name' => $this->faker->sentence(3),
+            'year' => $this->faker->year(),
+            'genre' => $this->faker->randomElement(['suspenso', 'acción', 'drama', 'amor']),
             'duration' => $this->faker->numberBetween(80, 180),
-            'img_url'  => $this->faker->imageUrl(),
+            'country' => $this->faker->country(),
+            'img_url' => $this->faker->imageUrl(),
         ];
     }
 }

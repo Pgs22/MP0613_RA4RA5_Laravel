@@ -22,6 +22,7 @@ class ActorFactory extends Factory
             'birthdate' => $this->faker->date('Y-m-d', '-20 years'), 
             'country' => $this->faker->country(), 
             'img_url' => $this->faker->imageUrl(400, 600, 'people'),
+            'alias' => $this->faker->userName(),
         ];
     }
 }

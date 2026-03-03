@@ -15,8 +15,8 @@ class Film extends Model
         'name',
         'year',
         'genre',
-        'country',
         'duration',
+        'country',
         'img_url'
     ];
 }
