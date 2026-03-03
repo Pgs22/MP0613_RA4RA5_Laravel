@@ -101,8 +101,7 @@ class FilmController extends Controller
             }
         }
 
-        $films = $query->orderBy('year')->get()->toArray();
-
+        $films = Film::orderBy('year')->get()->toArray();
         return view('films.list', ["films" => $films, "title" => $title]);
     }
 
