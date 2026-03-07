@@ -13,7 +13,9 @@
                 <tr>
                     @foreach($films as $film)
                         @foreach(array_keys($film) as $key)
-                            <th>{{$key}}</th>
+                            @if($key !== 'id')
+                                <th>{{$key}}</th>
+                            @endif
                         @endforeach
                         @break
                     @endforeach
@@ -26,7 +28,6 @@
                         <td>{{$film['genre']}}</td>
                         <td>{{$film['duration']}}</td>
                         <td>{{$film['country']}}</td>
-                        {{-- Mantenemos tu lógica de imagen pero con el arreglo de la variable --}}
                         <td><img src="{{$film['img_url'] ?? $film['imagen_url']}}" style="width: 100px; height: 120px;" /></td>
                     </tr>
                 @endforeach
