@@ -128,7 +128,7 @@ class FilmController extends Controller
      */
     public function listFilmsDuration($duration = null)
         {
-        $title = "Listado de todas las pelis";
+        $title = "Listado de todas las pelis por duración";
         if (is_null($duration)) {
             $films = Film::orderBy('duration')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
@@ -143,7 +143,7 @@ class FilmController extends Controller
      */
     public function listFilmsCountry($country = null)
     {
-        $title = "Listado de todas las pelis";
+        $title = "Listado de todas las pelis por país";
         if (is_null($country)) {
             $films = Film::orderBy('country')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
@@ -158,7 +158,7 @@ class FilmController extends Controller
      */
     public function sortFilms($year = null)
     {
-        $title = "Listado de todas las pelis";
+        $title = "Listado de todas las pelis por año";
         if (is_null($year)) {
             $films = Film::orderBy('year', 'desc')->get();
             $title = "Listado de todas las pelis ordenadas x año";
