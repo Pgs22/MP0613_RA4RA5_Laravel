@@ -110,7 +110,7 @@ class FilmController extends Controller
     public function listFilmsByGenre($genre = null)
     {
 
-        $title = "Listado de todas las pelis";
+        $title = "Listado de todas las pelis por categoría";
 
         $customOrder = "FIELD(genre, 'action', 'drama', 'romance', 'suspense')";
 
