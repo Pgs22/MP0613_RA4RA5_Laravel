@@ -17,7 +17,12 @@ class ActorFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->firstName(), 
+            'surname' => $this->faker->lastName(), 
+            'birthdate' => $this->faker->date('Y-m-d', '-20 years'), 
+            'country' => $this->faker->country(), 
+            'img_url' => $this->faker->imageUrl(400, 600, 'people'),
+            'alias' => $this->faker->userName(),
         ];
     }
 }

@@ -12,8 +12,10 @@
             <table border="1">
                 <tr>
                     @foreach($films as $film)
-                        @foreach(array_keys($film) as $key)
-                            <th>{{$key}}</th>
+                        @foreach(array_keys(is_array($film) ? $film : $film->toArray()) as $key)
+                            @if($key !== 'id')
+                                <th>{{$key}}</th>
+                            @endif
                         @endforeach
                         @break
                     @endforeach
@@ -21,13 +23,14 @@
 
                 @foreach($films as $film)
                     <tr>
-                        <td>{{$film['name']}}</td>
-                        <td>{{$film['year']}}</td>
-                        <td>{{$film['genre']}}</td>
-                        <td>{{$film['duration']}}</td>
-                        <td>{{$film['country']}}</td>
-                        {{-- Mantenemos tu lógica de imagen pero con el arreglo de la variable --}}
-                        <td><img src="{{$film['img_url'] ?? $film['imagen_url']}}" style="width: 100px; height: 120px;" /></td>
+                        <td>{{ $film->name }}</td>
+                        <td>{{ $film->year }}</td>
+                        <td>{{ $film->genre }}</td>
+                        <td>{{ $film->duration }}</td>
+                        <td>{{ $film->country }}</td>
+                        <td><img src="{{ $film->img_url }}" style="width: 100px; height: 120px;" alt="Poster"></td>
+                        <td>{{ $film->created_at }}</td>
+                        <td>{{ $film->updated_at }}</td>
                     </tr>
                 @endforeach
             </table>

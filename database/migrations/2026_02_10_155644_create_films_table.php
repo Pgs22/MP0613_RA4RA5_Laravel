@@ -17,7 +17,7 @@ return new class extends Migration
         $table->year('year');
         $table->string('genre', 50);
         $table->Integer('duration');
-        $table->string('country', 30);
+        $table->string('country', 100);
         $table->string('img_url', 255);
         $table->timestamps();
         });

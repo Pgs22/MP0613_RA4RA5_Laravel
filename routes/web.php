@@ -24,7 +24,7 @@ Route::middleware('year')->prefix('filmout')->group(function() {
     // Routes included with prefix "filmout"       
     Route::get('oldFilms/{year?}',[FilmController::class, "listOldFilms"])->name('oldFilms');
     Route::get('newFilms/{year?}',[FilmController::class, "listNewFilms"])->name('newFilms');
-    Route::get('films/{year?}/{genre?}',[FilmController::class, "listFilms"])->name('listFilms');
+    Route::get('films/{year?}/{genre?}/{duration?}/{country?}',[FilmController::class, "listFilms"])->name('listFilms');
     Route::get('filmsByYear/{year?}',[FilmController::class, "listFilmsByYear"])->name('filmsByYear');
     Route::get('filmsByGenre/{genre?}',[FilmController::class, "listFilmsByGenre"])->name('filmsByGenre');
     Route::get('filmsDuration/{duration?}', [FilmController::class, 'listFilmsDuration'])->name('filmsDuration');
