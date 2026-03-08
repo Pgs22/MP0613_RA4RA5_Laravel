@@ -12,7 +12,7 @@
             <table border="1">
                 <tr>
                     @foreach($films as $film)
-                        @foreach(array_keys($film) as $key)
+                        @foreach(array_keys(is_array($film) ? $film : $film->toArray()) as $key)
                             @if($key !== 'id')
                                 <th>{{$key}}</th>
                             @endif

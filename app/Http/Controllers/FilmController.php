@@ -117,17 +117,25 @@ class FilmController extends Controller
         return view('films.list', ["films" => $films, "title" => $title]);
     }
     
+    /**
+     * List films for genre
+    */
     public function listFilmsByGenre($genre = null)
     {
+
         $title = "Listado de todas las pelis";
+
+        $customOrder = "FIELD(genre, 'action', 'drama', 'romance', 'suspense')";
+
         if (is_null($genre)) {
-            $films = Film::orderBy('year')->get();
+            $films = Film::orderByRaw($customOrder)->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::whereRaw('LOWER(genre) = ?', [strtolower($genre)])->orderBy('year')->get()->toArray();
-        $title = "Listado de todas las pelis filtrado x categoria";
+        $films = Film::whereRaw('LOWER(genre) = ?', [strtolower($genre)])->orderBy('genre')->get();
+        $title = "Listado de todas las pelis filtrado x categoría";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
+
     /**
      * List films for duration
      */
@@ -135,10 +143,10 @@ class FilmController extends Controller
         {
         $title = "Listado de todas las pelis";
         if (is_null($duration)) {
-            $films = Film::orderBy('year')->get();
+            $films = Film::orderBy('duration')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::where('duration', $duration)->orderBy('year')->get()->toArray();
+        $films = Film::where('duration', $duration)->orderBy('duration')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x duración";
         return view('films.list', ["films" => $films, "title" => $title]);
     }
@@ -149,10 +157,10 @@ class FilmController extends Controller
     {
         $title = "Listado de todas las pelis";
         if (is_null($country)) {
-            $films = Film::orderBy('year')->get();
+            $films = Film::orderBy('country')->get();
             return view('films.list', ["films" => $films, "title" => $title]);
         }
-        $films = Film::whereRaw('LOWER(country) = ?', [strtolower($country)])->orderBy('year')->get()->toArray();
+        $films = Film::whereRaw('LOWER(country) = ?', [strtolower($country)])->orderBy('country')->get()->toArray();
         $title = "Listado de todas las pelis filtrado x país";
         return view('films.list', ["films" => $films, "title" => $title]);
     }

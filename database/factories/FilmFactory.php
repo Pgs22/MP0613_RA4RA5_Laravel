@@ -16,7 +16,7 @@ class FilmFactory extends Factory
      */
     public function definition(): array
     {
-        $randomId = $this->faker->numberBetween(1, 1000);
+        $randomId = $this->faker->numberBetween(1, 100);
         
         return [
             'name' => $this->faker->sentence(3),
