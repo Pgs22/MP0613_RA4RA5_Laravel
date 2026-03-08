@@ -16,13 +16,15 @@ class FilmFactory extends Factory
      */
     public function definition(): array
     {
+        $randomId = $this->faker->numberBetween(1, 1000);
+        
         return [
             'name' => $this->faker->sentence(3),
             'year' => $this->faker->year(),
-            'genre' => $this->faker->randomElement(['suspenso', 'acción', 'drama', 'amor']),
+            'genre' => $this->faker->randomElement(['suspense', 'action', 'drama', 'romance']),
             'duration' => $this->faker->numberBetween(80, 180),
             'country' => $this->faker->country(),
-            'img_url' => $this->faker->imageUrl(),
+            'img_url' => "https://picsum.photos/id/{$randomId}/600/400",
         ];
     }
 }

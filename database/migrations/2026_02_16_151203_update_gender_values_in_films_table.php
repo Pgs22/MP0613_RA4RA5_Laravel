@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('films', function (Blueprint $table) {
-        $table->enum('genre', ['suspenso', 'acción', 'drama', 'amor'])->change();
+        $table->enum('genre', ['suspense', 'action', 'drama', 'romance'])->change();
         });
     }
 

@@ -28,7 +28,9 @@
                         <td>{{$film['genre']}}</td>
                         <td>{{$film['duration']}}</td>
                         <td>{{$film['country']}}</td>
-                        <td><img src="{{$film['img_url'] ?? $film['imagen_url']}}" style="width: 100px; height: 120px;" /></td>
+                        <td><img src="{{ $film['img_url'] }}" style="width: 100px; height: 120px;" alt="Poster"></td>
+                        <td>{{$film['created_at']}}</td>
+                        <td>{{$film['updated_at']}}</td>
                     </tr>
                 @endforeach
             </table>
