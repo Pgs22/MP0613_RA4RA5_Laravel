@@ -16,7 +16,10 @@
         <li><a href="/filmout/count">Numero total de pelis</a></li>
     </ul>
 
-    {{-- Bloque Añadir Pelicula (El Formulario) --}}
+    <h1 class="mt-4">Lista de Actores</h1>
+    <a href="{{ route('actors') }}">Ver Listado de Actores</a>
+
+
     <hr>   
     <h2>Añadir Pelicula</h2>
     @if(session('error'))
