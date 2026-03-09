@@ -33,10 +33,17 @@ Route::middleware('year')->prefix('filmout')->group(function() {
     Route::get('sort/', [FilmController::class, 'sortFilms'])->name('sortFilms');
 });
 
+Route::middleware('year')->prefix('actorout')->group(function() {
+    // Routes included with prefix "actorout"
+    Route::get('/actors', [App\Http\Controllers\ActorController::class, 'listActors'])->name('actors');
+});
+
 // Creamos nueva ruta para el formulario
 Route::middleware('ValidateUrl')->prefix('filmin')->group(function () {
     Route::post('/film', [FilmController::class, 'createFilm'])->name('film');
 });
+
+
 
 
 
