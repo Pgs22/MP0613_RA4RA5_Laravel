@@ -16,9 +16,22 @@
         <li><a href="/filmout/count">Numero total de pelis</a></li>
     </ul>
 
-    <h1 class="mt-4">Lista de Actores</h1>
-    <a href="{{ route('actors') }}">Ver Listado de Actores</a>
+    <h1 class="mt-4">Listado de Actores</h1>
+    <ul>
+        <li><a href="/actorout/actors">Actores</a></li>
+    </ul>
 
+    <form action="" method="GET" onsubmit="this.action='/actorout/listActorsByDecade/' + this.year.value;">
+        <label for="year">Filtrar Actores por Década:</label>
+        <select name="year" id="year">
+            <option value="1970">1970 - 1979</option>
+            <option value="1980">1980 - 1989</option>
+            <option value="1990">1990 - 1999</option>
+            <option value="2000">2000 - 2009</option>
+            <option value="2010">2010 - 2019</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
 
     <hr>   
     <h2>Añadir Pelicula</h2>

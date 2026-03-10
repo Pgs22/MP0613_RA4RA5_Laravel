@@ -16,4 +16,18 @@ class ActorController extends Controller
         return view('actors.list', compact('actors', 'title'));
     }
 
+    public function listActorsByDecade($year)
+    {
+        $start = $year . "-01-01";
+        $end = ($year + 9) . "-12-31";
+        
+        $title = "Actores nacidos en la década de $year";
+
+        $actors = \App\Models\Actor::whereBetween('birthdate', [$start, $end])
+                                    ->orderBy('birthdate', 'asc')
+                                    ->get();
+
+        return view('actors.list', compact('actors', 'title'));
+    }
+
 }
