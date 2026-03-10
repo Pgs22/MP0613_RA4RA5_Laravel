@@ -34,8 +34,8 @@ Route::middleware('year')->prefix('filmout')->group(function() {
 });
 
 Route::middleware('year')->prefix('actorout')->group(function() {
-    // Routes included with prefix "actorout"
     Route::get('/actors', [App\Http\Controllers\ActorController::class, 'listActors'])->name('actors');
+    Route::get('/listActorsByDecade/{year?}', [App\Http\Controllers\ActorController::class, 'listActorsByDecade'])->name('listActorsByDecade');
 });
 
 // Creamos nueva ruta para el formulario
