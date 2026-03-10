@@ -16,12 +16,18 @@ class ActorFactory extends Factory
      */
     public function definition(): array
     {
+$gender = $this->faker->randomElement(['male', 'female']);
+        $name = $this->faker->firstName($gender);
+        
+        $styles = ['hollywood', 'portrait', 'dramatic', 'costume', 'action-hero'];
+        $selectedStyle = $this->faker->randomElement($styles);
+
         return [
-            'name' => $this->faker->firstName(), 
+            'name' => $name, 
             'surname' => $this->faker->lastName(), 
             'birthdate' => $this->faker->date('Y-m-d', '-20 years'), 
             'country' => $this->faker->country(), 
-            'img_url' => $this->faker->imageUrl(400, 600, 'people'),
+            'img_url' => "https://loremflickr.com/400/600/actor,{$selectedStyle},person/all?lock=" . md5($name),
             'alias' => $this->faker->userName(),
         ];
     }
