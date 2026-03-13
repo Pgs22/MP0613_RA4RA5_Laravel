@@ -30,4 +30,12 @@ class ActorController extends Controller
         return view('actors.list', compact('actors', 'title'));
     }
 
+    public function countActors()
+    {
+        $number = Actor::count();
+        return view('actors.count', [
+            'number' => $number 
+        ]);
+    }
+
 }

@@ -36,6 +36,7 @@ Route::middleware('year')->prefix('filmout')->group(function() {
 Route::middleware('year')->prefix('actorout')->group(function() {
     Route::get('/actors', [App\Http\Controllers\ActorController::class, 'listActors'])->name('actors');
     Route::get('/listActorsByDecade/{year?}', [App\Http\Controllers\ActorController::class, 'listActorsByDecade'])->name('listActorsByDecade');
+    Route::get('/countActors', [App\Http\Controllers\ActorController::class, 'countActors'])->name('countActors');
 });
 
 // Creamos nueva ruta para el formulario
