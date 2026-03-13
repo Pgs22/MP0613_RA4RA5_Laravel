@@ -19,6 +19,7 @@
     <h1 class="mt-4">Listado de Actores</h1>
     <ul>
         <li><a href="/actorout/actors">Actores</a></li>
+        <li><a href="/actorout/countActors">Número total de actores</a></li>
     </ul>
 
     <form action="" method="GET" onsubmit="this.action='/actorout/listActorsByDecade/' + this.year.value;">
