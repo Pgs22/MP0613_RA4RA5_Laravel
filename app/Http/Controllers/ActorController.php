@@ -23,7 +23,7 @@ class ActorController extends Controller
         
         $title = "Actores nacidos en la década de $year";
 
-        $actors = \App\Models\Actor::whereBetween('birthdate', [$start, $end])
+        $actors = Actor::whereBetween('birthdate', [$start, $end])
                                     ->orderBy('birthdate', 'asc')
                                     ->get();
 
@@ -38,4 +38,19 @@ class ActorController extends Controller
         ]);
     }
 
+
+    public function destroy($id)
+    {
+        $actor = Actor::find($id);
+
+        if ($actor) {
+            $result = $actor::destroy($id); //Nos devuelve 0 si no se ha eliminado nada, o 1 si se ha eliminado el registro
+            $status = $result > 0; // Para convertir el resultado en un booleano
+        } else { $status = false; }
+
+        return response()->json([
+            "action" => "delete", // Para indicar a Postman la acción borrar que tenemos en la ruta api.php
+            "status" => $status
+        ]);
+    }
 }
