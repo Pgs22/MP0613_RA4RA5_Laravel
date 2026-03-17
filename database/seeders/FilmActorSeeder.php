@@ -20,7 +20,7 @@ class FilmActorSeeder extends Seeder
             // Mezclamos los actores y tomamos entre 1 y 3 aleatorios
             $randomActors = (array) array_rand(array_flip($actorIds), rand(1, 3));
             foreach ($randomActors as $actorId) {
-                DB::table('film_actor')->insert([
+                DB::table('actor_film')->insert([
                     'film_id' => $filmId,
                     'actor_id' => $actorId,
                     'created_at' => now(),
