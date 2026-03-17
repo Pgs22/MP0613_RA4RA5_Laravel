@@ -210,4 +210,11 @@ class FilmController extends Controller
 
     }
 
-}  
+    public function index() 
+    { 
+        $films = Film::with('actors')->get();
+        return response()->json($films);
+    }
+
+
+}
