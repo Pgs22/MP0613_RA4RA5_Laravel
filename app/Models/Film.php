@@ -19,4 +19,11 @@ class Film extends Model
         'country',
         'img_url'
     ];
+
+
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class)
+                    ->withTimestamps(); 
+    }
 }
